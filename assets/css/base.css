@@ -1,0 +1,95 @@
+/* Codee — 기본 */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+/* 페이지 전체 바탕 = 첫 화면 모션 배경과 같은 28px 점 격자 — 첫 화면 시작점(헤더 아래)에 맞춰 구역이 바뀌어도 점이 이어진다.
+   body가 아닌 html에 두어야 첫 화면 빛 층(.page-aura, z-index -1)이 바탕 위 · 본문 아래에 그려진다 */
+html {
+  background-color: var(--c-bg);
+  background-image: radial-gradient(circle, var(--c-dot) 1px, transparent 1.6px);
+  background-size: 28px 28px;
+  background-position: 0 var(--header-h);
+  color: var(--c-fg);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + var(--s-4));
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--c-fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+img, svg, canvas { display: block; max-width: 100%; }
+img { height: auto; }
+button { font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--c-fg); color: var(--c-bg); }
+
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+.nobr { white-space: nowrap; } /* 한글에 붙은 괄호 낱말을 한 덩어리로 */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--s-4);
+  top: var(--s-4);
+  z-index: 100;
+  padding: var(--s-3) var(--s-4);
+  background: var(--c-fg);
+  color: var(--c-bg);
+  font-size: var(--fs-small);
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; }
+
+.shell {
+  width: min(var(--max), calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+
+/* 링크 */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: var(--hit);
+  font-family: var(--font-mono);
+  font-size: calc(13 * var(--px));
+  letter-spacing: 0.04em;
+  color: var(--c-fg);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 calc(50% + 0.9em);
+  background-size: 100% 1px;
+}
+.text-link:hover { color: #FFFFFF; }

@@ -1,0 +1,121 @@
+/* Codee — 모션 */
+
+.js .hero__canvas {
+  opacity: 0;
+  transition: opacity var(--dur-reveal) var(--ease-out);
+}
+.js .hero__stage.is-live .hero__canvas { opacity: 1; }
+.js .hero__title { transition: opacity var(--dur-reveal) var(--ease-out); }
+.site-header { transition: background-color var(--dur-fast) var(--ease-out); }
+.site-header::after { transition: opacity var(--dur-fast) var(--ease-out); }
+/* 작업 화면 열고 닫기: 짧은 페이드 — 동작 줄이기 · 첫 화면 정지 설정이면 즉시(.is-instant) */
+.work-viewer { transition: opacity var(--dur-fast) var(--ease-out); }
+.work-viewer.is-instant { transition: none; }
+
+.lang-switch,
+.motion-toggle,
+.work-card__link,
+.site-nav__list a,
+.steps__tab {
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+.site-nav__list a::after { transition: transform var(--dur-fast) var(--ease-out); }
+.site-nav__list a:hover::after { transform: scaleX(1); }
+.work-card__arrow,
+.text-link span[aria-hidden="true"] {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.work-card__link:hover .work-card__arrow,
+.work-card__link:focus-visible .work-card__arrow,
+.work-card__more:focus-visible .work-card__arrow,
+.text-link:hover span[aria-hidden="true"] { transform: translateX(4px); }
+.hero__links .text-link:hover span[aria-hidden="true"] { transform: translateY(3px); }
+.site-footer .text-link:hover span[aria-hidden="true"] { transform: translateY(-3px); }
+.contact__email a { transition: background-size 300ms var(--ease-out); }
+
+.flow-panel.is-entering { animation: panel-in var(--dur-panel) var(--ease-out) both; }
+
+/* 스와이프 스택: 스프링(stiffness 300 · damping 30)에 가까운, 살짝 넘쳤다 돌아오는 곡선 */
+.js .work-list[data-stack].is-ready > .work-card {
+  transition:
+    transform 620ms cubic-bezier(0.22, 1.12, 0.36, 1),
+    box-shadow 300ms var(--ease-out);
+}
+.js .work-list[data-stack].is-ready > .work-card.is-dragging { transition: none; }
+
+.gallery__card {
+  transition:
+    transform 520ms var(--ease-out),
+    opacity 520ms var(--ease-out);
+}
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.linemap.is-ready .linemap__path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.linemap.is-ready .mark,
+.linemap.is-ready .segment-hidden,
+.linemap.is-ready .linemap__tag,
+.linemap.is-ready .linemap__stations > li { opacity: 0; }
+
+@media (max-width: 720px) {
+  .js .site-nav {
+    transition:
+      opacity var(--dur-menu) var(--ease-out),
+      transform var(--dur-menu) var(--ease-out),
+      visibility 0s linear var(--dur-menu);
+  }
+  .js .site-nav.is-open {
+    transition:
+      opacity var(--dur-menu) var(--ease-out),
+      transform var(--dur-menu) var(--ease-out),
+      visibility 0s linear 0s;
+  }
+}
+.menu-toggle__icon::before,
+.menu-toggle__icon::after { transition: transform var(--dur-fast) var(--ease-out), top var(--dur-fast) var(--ease-out), bottom var(--dur-fast) var(--ease-out); }
+
+/* ---------- 동작 줄이기: 이동 · 페이드 제거, 기능(상태 · 결과)은 유지 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+  .js .hero__canvas { opacity: 1; }
+  .linemap.is-ready .linemap__path { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+  .linemap.is-ready .mark,
+  .linemap.is-ready .segment-hidden,
+  .linemap.is-ready .linemap__tag,
+  .linemap.is-ready .linemap__stations > li { opacity: 1 !important; }
+  .work-card__link:hover .work-card__arrow,
+  .work-card__link:focus-visible .work-card__arrow,
+  .work-card__more:focus-visible .work-card__arrow,
+  .text-link:hover span[aria-hidden="true"],
+  .hero__links .text-link:hover span[aria-hidden="true"],
+  .site-footer .text-link:hover span[aria-hidden="true"] { transform: none; }
+}
+
+/* 인쇄: 모션 대기 상태를 남기지 않는다 */
+@media print {
+  .linemap.is-ready .linemap__path { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+  .linemap.is-ready .mark,
+  .linemap.is-ready .segment-hidden,
+  .linemap.is-ready .linemap__tag,
+  .linemap.is-ready .linemap__stations > li { opacity: 1 !important; }
+  .hero__canvas,
+  .hero__grab,
+  .page-aura,
+  .work-viewer { display: none; }
+  .hero__fallback { display: block; }
+  .hero.is-wordmark-drawn .hero__title { opacity: 1; }
+  .site-header { position: static; }
+}

@@ -1,0 +1,75 @@
+/* Codee — 토큰
+ * 모노크롬(바탕 · 글자 · 보조 · 선 · 강한 선 + 표면 한 단계), IBM Plex Sans KR · IBM Plex Mono. 강조색 없음 — 강조는 Glass Icon의 굴절 · 반사가 맡는다.
+ */
+:root {
+  color-scheme: dark;
+
+  /* 디자인 1px — 1440까지 정확히 1px, 1440~1920은 화면 폭에 비례해 1.333px까지, 1920부터 고정.
+     1440 시안을 큰 화면에서 같은 비율로 보이게 하는 기준. 고정 크기는 calc(N * var(--px))로 쓴다 */
+  --px: clamp(1px, calc(100vw / 1440), 1.3334px);
+
+  /* 색 — 대비(바탕 #0B0C0E 기준): fg 16.9 · muted 7.4 · line-strong 2.9(장식 경계용) */
+  --c-bg: #0B0C0E;
+  --c-surface: #111317;
+  --c-surface-2: #16191E;
+  --c-fg: #EDEEF0;
+  --c-muted: #9AA0A8;
+  --c-line: #2A2E35;
+  --c-line-strong: #5A5F67;
+  --c-focus: #EDEEF0;
+  --c-glass-glow: rgba(237, 238, 240, 0.10);
+  --c-dot: rgba(237, 238, 240, 0.14);
+  --dim: rgb(11 12 14 / 0.92); /* 작업 화면(work-viewer) 뒤 딤 — 바탕 #0B0C0E 기반 */
+
+  /* 글자 */
+  --font-sans: "IBM Plex Sans KR", "IBM Plex Sans", system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --fs-display: clamp(76px, 11vw, 208px);
+  --fs-h2: clamp(36px, 3.6vw, 69px);
+  --fs-h3: clamp(20px, 1.5vw, 29px);
+  --fs-lead: clamp(18px, 1.3vw, 25px);
+  --fs-body: calc(16 * var(--px));
+  --fs-small: calc(14 * var(--px));
+  --fs-label: calc(12 * var(--px));
+  --lh-tight: 1.04;
+  --lh-head: 1.2;
+  --lh-body: 1.7;
+  --tracking-display: -0.065em;
+  --tracking-head: -0.035em;
+  --tracking-label: 0.12em;
+
+  /* 간격 — 4의 배수 */
+  --s-1: calc(4 * var(--px));
+  --s-2: calc(8 * var(--px));
+  --s-3: calc(12 * var(--px));
+  --s-4: calc(16 * var(--px));
+  --s-5: calc(24 * var(--px));
+  --s-6: calc(32 * var(--px));
+  --s-7: calc(48 * var(--px));
+  --s-8: calc(64 * var(--px));
+  --s-9: calc(96 * var(--px));
+  --s-10: calc(128 * var(--px));
+  --s-11: calc(160 * var(--px));
+
+  /* 틀 */
+  --max: 1792px;
+  --gutter: clamp(20px, 3.4vw, 65px);
+  --header-h: calc(72 * var(--px));
+  --radius: 2px;
+  --hit: calc(44 * var(--px));
+
+  /* 모션 — 효과별 값은 assets/css/motion.css 머리말 표 */
+  --dur-fast: 160ms;
+  --dur-panel: 180ms;
+  --dur-menu: 220ms;
+  --dur-reveal: 700ms;
+  --dur-draw: 1200ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --header-h: 64px;
+  }
+}
